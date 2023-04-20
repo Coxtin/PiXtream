@@ -1,0 +1,24 @@
+body{
+    background-color: whitesmoke;
+    text-align: center;
+    margin:100px;
+    font-family: "Press Start 2P", cursive;
+}
+.signup-form-form{
+    margin: 0 auto;
+    height: 100% auto;
+    width: 50px auto;
+    border:solid violet;
+    border-radius: 100px;
+    width: 1000px;
+}
+input{
+    height: 50px;
+    font-family: "Comic Sans", cursive;
+    background-color: pink;
+    border-radius: 8px;
+
+}
+.submit{
+    font-family : "comic sans";
+}
