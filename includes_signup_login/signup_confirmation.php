@@ -6,13 +6,13 @@
     <title>Te-ai inregistrat cu succes</title>
 </head>
 <body>
-        <div class = "inregistrarecountdown">
-        <h2>Te-ai inregistrat cu succes</h2>
+        <div class = "countdown">
+        <h2>You signed up</h2>
         <br>
-        <p>Vei fi redirectionat catre pagina de login in <span id="countdown">5 secunde</span></p>
+        <p>You will be redirected to the login page <span id="countdown">5 seconds</span></p>
         </div>
         <?php
-            $redirect_url = 'pagina_login.php';
+            $redirect_url = '../pagina_login.php';
             $countdown_time = 5;
             echo '<script>setTimeout(function(){ window.location.href = "' . $redirect_url . '"; }, ' . ($countdown_time * 1000) . ');</script>';
 	    ?>
