@@ -3,3 +3,12 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+.login-form{
+    margin: 0 auto;
+    height: 100% auto;
+    width: 50px auto;
+    text-align: center;
+    border: solid black;
+    margin-top:100px auto;
+
+}
