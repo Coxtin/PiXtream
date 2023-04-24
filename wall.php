@@ -1,4 +1,6 @@
 <?php include("includes/header.php"); ?>
+<?php include(ROOT_PATH ."includes_signup_login/code_functions.php");?>
+<?php $posts = getPublishedPosts();?>
 <link rel="stylesheet" href="static/wall.css">
 
 <div id="mySidenav" class="sidenav">
@@ -61,3 +63,9 @@
     </div>
   </div>
 </div>
+
+<?php foreach($posts as $posts_inside):?>
+  <div class="posts" style="margin-left :0px;">
+    <img src="<?php echo BASE_URL . "static/images/" . $posts_inside['postsImage'] ;?>" alt="">
+</div>
+    <?php endforeach ?>

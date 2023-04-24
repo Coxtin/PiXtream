@@ -164,4 +164,11 @@ function emptyInputLogin($username, $pwd) {
             exit();
         }
     }
+
+    function getPublishedPosts(){
+        $sql = "SELECT* FROM posts WHERE published = true";
+        $result = mysqli_query($conn, $result);
+        $posts = mysqli_fetch_all($result, MYSQL_ASSOC);
+        return $posts;
+    }
 }
