@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gazdă: localhost
--- Timp de generare: apr. 18, 2023 la 01:52 PM
+-- Timp de generare: apr. 24, 2023 la 06:29 PM
 -- Versiune server: 8.0.31
 -- Versiune PHP: 7.4.32
 
@@ -44,9 +44,12 @@ CREATE TABLE `comments` (
 CREATE TABLE `posts` (
   `postId` int NOT NULL,
   `usersPostId` int DEFAULT NULL,
-  `postImage` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `postImage` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `content` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `created` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `published` tinyint(1) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -76,15 +79,18 @@ CREATE TABLE `users` (
   `usersBirthday` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   `usersGender` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   `usersPhone` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `usersPwd` varchar(100) COLLATE utf8mb4_general_ci NOT NULL
+  `usersPwd` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `usersDescription` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Eliminarea datelor din tabel `users`
 --
 
-INSERT INTO `users` (`usersId`, `usersFirstName`, `usersLastName`, `usersUsername`, `usersEmail`, `usersBirthday`, `usersGender`, `usersPhone`, `usersPwd`) VALUES
-(1, 'Oltean', 'Costin', 'Coxtin', 'olteancostin3@gmail.com', '2004-07-01', 'Masculin', '36546546654165', '$2y$10$CAseTX/ht0EQw/E8zJvJSernzWPGzreExUx87pG0F5UKaof7QeqVm');
+INSERT INTO `users` (`usersId`, `usersFirstName`, `usersLastName`, `usersUsername`, `usersEmail`, `usersBirthday`, `usersGender`, `usersPhone`, `usersPwd`, `usersDescription`, `createdAt`, `updatedAt`) VALUES
+(1, 'Oltean', 'Costin', 'Coxtin', 'olteancostin3@gmail.com', '2004-04-01', 'Male', '0752827968', '$2y$10$ps9hZ0Gr/1ryrtOkcfFRs.Kf2oGpLnf3wLJ6jJebuaFeGOYFgeIrS', NULL, '2023-04-22 19:49:37', NULL);
 
 -- --------------------------------------------------------
 
