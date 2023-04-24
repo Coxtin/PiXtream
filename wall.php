@@ -1,5 +1,5 @@
 <?php include("includes/header.php"); ?>
-<br>
+<link rel="stylesheet" href="static/wall.css">
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>

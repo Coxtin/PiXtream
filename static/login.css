@@ -4,11 +4,10 @@ body{
     background-attachment: fixed;
 }
 .login-form{
-    margin: 0 auto;
     height: 100% auto;
-    width: 50px auto;
+    width: 100px auto;
     text-align: center;
-    border: solid black;
+    border: dotted black;
     margin-top:100px auto;
 
 }

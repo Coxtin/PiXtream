@@ -30,3 +30,6 @@ body{
     margin-left: -3px;
     top: 0;  
 }
+
+insert into posts ('postId', 'usersPostId', 'title', 'postImage', 'content', 'published', 'createdAt', 'updatedAt')
+			VALUES(1, 1, 'Hai sa traesti', 'img1.jpg', 'cv', 1, '2023-04-22 22:49:37', '2023-04-22 22:49:37');
