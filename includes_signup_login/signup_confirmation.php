@@ -12,7 +12,7 @@
         <p>You will be redirected to the login page <span id="countdown">5 seconds</span></p>
         </div>
         <?php
-            $redirect_url = '../pagina_login.php';
+            $redirect_url = '../login.php';
             $countdown_time = 5;
             echo '<script>setTimeout(function(){ window.location.href = "' . $redirect_url . '"; }, ' . ($countdown_time * 1000) . ');</script>';
 	    ?>
