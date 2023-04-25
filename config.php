@@ -6,5 +6,5 @@
     }
 
     define('ROOT_PATH' , realpath(__FILE__));
-    define("BASE_URL", 'http://localhost/atestat_costin_socialmedia');
+    define('BASE_URL', 'http://localhost/atestat_costin');
 ?>

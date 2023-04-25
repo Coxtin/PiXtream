@@ -1,6 +1,16 @@
-<?php include("includes/header.php"); ?>
-<?php include(ROOT_PATH ."includes_signup_login/code_functions.php");?>
-<?php $posts = getPublishedPosts();?>
+<?php require_once    ("config.php"); ?>
+
+<?php include("includes_signup_login/code_functions.php");?>
+<?php $posts = getPublishedPosts();
+// echo '<pre>';
+// echo print_r($posts);
+// echo '</pre>';
+
+?>
+<?php include("includes/header.php");?>
+
+
+
 <link rel="stylesheet" href="static/wall.css">
 
 <div id="mySidenav" class="sidenav">
@@ -21,51 +31,16 @@
   }
 </script>
 
-<div class="container">
+<div class="container justify-content-center ">
+<?php foreach($posts as $posts_inside):?>
+
   <div class="card">
-    <div class="card-header">
-      Featured
-    </div>
     <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <h3 class="card-title"><?php echo  $posts_inside['title'] ?></h3>
+      <img src="static/images/<?php echo  $posts_inside['postImage'] ?>" alt="">
+      <p><?php echo  $posts_inside['content'] ?></p>
     </div>
   </div>
-  <div class="card">
-    <div class="card-header">
-      Featured
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header">
-      Featured
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header">
-      Featured
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-  </div>
+    <?php endforeach ?>
 </div>
 
-<?php foreach($posts as $posts_inside):?>
-  <div class="posts" style="margin-left :0px;">
-    <img src="<?php echo BASE_URL . "static/images/" . $posts_inside['postsImage'] ;?>" alt="">
-</div>
-    <?php endforeach ?>

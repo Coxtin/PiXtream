@@ -3,7 +3,6 @@
     global $conn;
 
 function emptyInputSignup($firstname, $lastname, $username, $gender, $phone, $birthday, $email, $pwd1, $pwd2) {
-    $result;
     if (empty($firstname) || empty($lastname) || empty($username) || empty($gender) || empty($phone) || empty($birthday) || empty($email) || empty($pwd1) || empty($pwd2)){
         $result = true;        
     }
@@ -13,7 +12,6 @@ function emptyInputSignup($firstname, $lastname, $username, $gender, $phone, $bi
     return $result;
 }
 function userAge($birthday){
-    $result;
     $birthday_date = new datetime($birthday);
     $today = new datetime();
     $age = $today->diff($birthday_date)->y;
@@ -26,7 +24,6 @@ function userAge($birthday){
     return $result;
 }
 function invalidUsername($username) {
-    $result;
     if (!preg_match("/^[a-zA-Z]*$/", $username)){
         $result = true;        
     }
@@ -35,8 +32,7 @@ function invalidUsername($username) {
     }
     return $result;
 }
-function invalidEmail($email) {
-    $result;
+function invalidEmail($email){
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $result = true;        
     }
@@ -46,7 +42,6 @@ function invalidEmail($email) {
     return $result;
 }
 function pwdDoesNotMatch($pwd1, $pwd2) {
-    $result;
     if ($pwd1 !== $pwd2){
         $result = true;        
     }
@@ -56,7 +51,6 @@ function pwdDoesNotMatch($pwd1, $pwd2) {
     return $result;
 }
 function pwdLenght($pwd1){
-    $result;
     if(strlen($pwd1) < 8){
         $result = true;
     }
@@ -66,7 +60,6 @@ function pwdLenght($pwd1){
     return $result;
 }
 function pwdSpecialCharacters($pwd1){
-    $result;
     if(!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $pwd1)){
         $result = true;
     }
@@ -76,7 +69,6 @@ function pwdSpecialCharacters($pwd1){
     return $result;
 }
 function pwdCapsCharactes($pwd1){
-    $result;
     if (!preg_match('/[A-Z]/', $pwd1)){
         $result = true;
     }
@@ -86,7 +78,6 @@ function pwdCapsCharactes($pwd1){
     return $result;
 }
 function pwdNumbers($pwd1){
-    $result;
     if(!preg_match('/\d/', $pwd1)){
         $result = true;
     }
@@ -132,7 +123,6 @@ function createAccount($conn, $firstname, $lastname, $username, $email, $birthda
 }
 
 function emptyInputLogin($username, $pwd) {
-    $result;
     if (empty($username) || empty($pwd)){
         $result = true;        
     }
@@ -140,12 +130,13 @@ function emptyInputLogin($username, $pwd) {
         $result = false;
     }
     return $result;
+}
 
     function loginUser($conn, $username, $pwd) {
         $usernameExists = usernameTaken($conn, $username, $username);
 
         if($usernameExists == false){
-            header('location:../pagina_login.php?error=wronglogin');
+            header('location:../login.php?error=wronglogin');
             exit();
         }
 
@@ -153,7 +144,7 @@ function emptyInputLogin($username, $pwd) {
         $checkPwd = password_verify($pwd, $pwdhashed);
 
         if($checkPwd == false){
-            header('location:../pagina_login.php?error=wronglogin');
+            header('location:../login.php?error=wronglogin');
             exit();
         }
         elseif ($checkPwd == true){
@@ -166,9 +157,10 @@ function emptyInputLogin($username, $pwd) {
     }
 
     function getPublishedPosts(){
+        global $conn;
         $sql = "SELECT* FROM posts WHERE published = true";
-        $result = mysqli_query($conn, $result);
-        $posts = mysqli_fetch_all($result, MYSQL_ASSOC);
+        $result = mysqli_query($conn, $sql);
+        $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
         return $posts;
     }
-}
+?>
