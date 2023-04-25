@@ -18,6 +18,7 @@
   <a href="#">Profile</a>
   <a href="#">Search</a>
   <a href="#">Messages</a>
+  <a href="#">Add a post</a>
 </div>
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
 
