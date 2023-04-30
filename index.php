@@ -1,11 +1,22 @@
 <?php require("config.php"); ?>
 <?php include("includes/header.php"); ?>
-<link rel="stylesheet" href="static/index.css">
-    <div class ="first_page">
-    <h1>L.T.M.E</h1>
+<?php include("includes_signup_login/code_functions.php"); ?>
+<link rel="stylesheet" href="static/css/index.css">
+
+    <?php 
+     if(isset($_SESSION['userUsername'])){
+        header('location:users_proprieties/wall.php');
+    }
+    ?>
+    <div class="title-container">
+    <h1 class = "title">PiXtreme</h1>
     <br>
-    <a href="pagina_login.php"> Logheaza-te </a>
+    <a href="login.php"> Logheaza-te </a>
     <br>
-    <a href="pagina_signup.php"> Inregistreaza-te </a>
+    <a href="signup.php"> Inregistreaza-te </a>
     </div>
+    
+
+
+
     

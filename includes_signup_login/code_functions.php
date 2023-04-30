@@ -23,7 +23,7 @@ function userAge($birthday){
     }
     return $result;
 }
-function invalidUsername($username) {
+/*function invalidUsername($username) {
     if (!preg_match("/^[a-zA-Z]*$/", $username)){
         $result = true;        
     }
@@ -31,7 +31,7 @@ function invalidUsername($username) {
         $result = false;
     }
     return $result;
-}
+}*/
 function invalidEmail($email){
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $result = true;        
@@ -90,7 +90,7 @@ function usernameTaken($conn, $username, $email) {
     $sql = "SELECT * FROM users WHERE usersUsername = ? OR usersEmail = ?;";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header('location:../pagina_signup.php?error=stmtfailed1');
+        header('location:../signup.php?error=stmtfailed1');
         exit();
     }
         mysqli_stmt_bind_param($stmt, "ss", $username, $email);
@@ -110,7 +110,7 @@ function createAccount($conn, $firstname, $lastname, $username, $email, $birthda
     $sql = "INSERT INTO users(usersFirstName, usersLastName, usersUsername, usersEmail, usersBirthday, usersGender, usersPhone, usersPwd) VALUES(?,?,?,?,?,?,?,?)";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header('location:../pagina_signup.php?error=stmtfailed2');
+        header('location:../signup.php?error=stmtfailed2');
         exit();
     }
 
@@ -118,7 +118,7 @@ function createAccount($conn, $firstname, $lastname, $username, $email, $birthda
         mysqli_stmt_bind_param($stmt, "ssssssss", $firstname, $lastname, $username, $email, $birthday, $gender, $phone, $hashedPwd);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);  
-        header('location:../pagina_signup.php?error=none');
+        header('location:../signup.php?error=none');
         exit();
 }
 
@@ -136,7 +136,7 @@ function emptyInputLogin($username, $pwd) {
         $usernameExists = usernameTaken($conn, $username, $username);
 
         if($usernameExists == false){
-            header('location:../login.php?error=wronglogin');
+            header('location:../login.php?error=wrongLogin');
             exit();
         }
 
@@ -151,7 +151,7 @@ function emptyInputLogin($username, $pwd) {
             session_start();
             $_SESSION["usersId"] = $usernameExists['usersId'];
             $_SESSION["usersUsername"] = $usernameExists['usersUsername'];
-            header('location:../wall.php');
+            header('location:../users_proprieties/wall.php');
             exit();
         }
     }
@@ -163,4 +163,20 @@ function emptyInputLogin($username, $pwd) {
         $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
         return $posts;
     }
+
+    function getNameById(){
+        global $conn;
+        $sql = "SELECT usersFirstName, usersLastName FROM users WHERE usersId = {$_SESSION['usersId']};";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row['usersFirstName'] . ' ' . $row['usersLastName'];
+    }
+    function getUsernameById(){
+        global $conn;
+        $sql = "SELECT usersUsername FROM users WHERE usersId = {$_SESSION['usersId']};";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row['usersUsername'];
+    }
+       
 ?>

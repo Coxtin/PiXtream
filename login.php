@@ -1,5 +1,5 @@
 <?php include("includes/header.php"); ?> 
-<link rel="stylesheet" href="static/login.css">
+<link rel="stylesheet" href="static/css/login.css">
 <section class = "login-form">
     <h2>Log in</h2>
     <div class = "login-form-form">

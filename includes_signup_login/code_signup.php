@@ -14,58 +14,58 @@
     require_once ('code_functions.php');
 
     if(emptyInputSignup($firstname, $lastname, $username, $gender, $phone, $birthday, $email, $pwd1, $pwd2) !== false){
-        header('location:../pagina_signup.php?error=emptyInput');
+        header('location:../signup.php?error=emptyInput');
         exit();
     }
 
     if(userAge($birthday) !== false){
-        header('location:../pagina_signup.php?error=invalidAge');
+        header('location:../signup.php?error=invalidAge');
         exit();
     }
 
-    if(invalidUsername($username) !== false){
-        header('location:../pagina_signup.php?error=invalidUsername');
+    /*if(invalidUsername($username) !== false){
+        header('location:../signup.php?error=invalidUsername');
         exit();
-    }
+    }*/
 
     if(invalidEmail($email) !== false){
-        header('location:../pagina_signup.php?error=invalidEmail');
+        header('location:../signup.php?error=invalidEmail');
         exit();
     }
 
     if(pwdDoesNotMatch($pwd1, $pwd2) !== false){
-        header('location:../pagina_signup.php?error=pwdDoesNotMatch');
+        header('location:../signup.php?error=pwdDoesNotMatch');
         exit();
     }
 
     if(pwdLenght($pwd1) !== false){
-        header('location:../pagina_signup.php?error=pwdLenghtTooShort');
+        header('location:../signup.php?error=pwdLenghtTooShort');
         exit();
     }
 
     if(pwdSpecialCharacters($pwd1) !== false){
-        header('location:../pagina_signup.php?error=pwdSpecialCharatersNeeded');
+        header('location:../signup.php?error=pwdSpecialCharatersNeeded');
         exit();
     }
 
     if(pwdCapsCharactes($pwd1) !== false){
-        header('location:../pagina_signup.php?error=pwdCapsCharactersNeeded');
+        header('location:../signup.php?error=pwdCapsCharactersNeeded');
         exit();
     }
 
     if(pwdNumbers($pwd1) !== false){
-        header('location:../pagina_signup.php?error=pwdNumbersNeeded');
+        header('location:../signup.php?error=pwdNumbersNeeded');
         exit();
     }
 
     if(usernameTaken($conn, $username, $email) !== false){
-        header('location:../pagina_signup.php?error=usernameTaken');
+        header('location:../signup.php?error=usernameTaken');
         exit();
     }
 
     createAccount($conn, $firstname, $lastname, $username, $email, $birthday, $gender, $phone, $pwd1);
     }
     else{
-        header("location: ../pagina_signup.php");
+        header("location: ../signup.php");
         exit();
     }

@@ -1,5 +1,5 @@
 <?php require("config.php"); ?>
-    <link rel="stylesheet" href="static/sign_up.css">
+    <link rel="stylesheet" href="static/css/signup.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
