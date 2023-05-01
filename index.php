@@ -11,9 +11,9 @@
     <div class="title-container">
     <h1 class = "title">PiXtreme</h1>
     <br>
-    <a href="login.php"> Logheaza-te </a>
+    <a href="login.php"> Log in </a>
     <br>
-    <a href="signup.php"> Inregistreaza-te </a>
+    <a href="signup.php"> Sign in </a>
     </div>
     
 

@@ -144,7 +144,7 @@ function emptyInputLogin($username, $pwd) {
         $checkPwd = password_verify($pwd, $pwdhashed);
 
         if($checkPwd == false){
-            header('location:../login.php?error=wronglogin');
+            header('location:../login.php?error=wrongLogin');
             exit();
         }
         elseif ($checkPwd == true){
@@ -178,5 +178,19 @@ function emptyInputLogin($username, $pwd) {
         $row = mysqli_fetch_assoc($result);
         return $row['usersUsername'];
     }
+    function getContentById(){
+        global $conn;
+        $sql = "SELECT usersDescription FROM users WHERE usersId = {$_SESSION['usersId']};";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0){
+        $row = mysqli_fetch_assoc($result);
+            if(empty($row['usersDescription'])){
+                echo "Enter a description about yourself";
+            }
+            else{
+                print_r($row['usersDescription']);
+            }
+            }
+        }
        
 ?>

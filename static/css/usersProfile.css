@@ -1,5 +1,5 @@
 body{
-    background-color:red ;
+    background-color:whitesmoke ;
 }
 .profile-picture {
     width: 150px;
@@ -15,7 +15,10 @@ body{
     transform: translateY(100px);
 
   }
-  p{
-    margin-top: 100px;
+.profile-name{
+  float: right;
 }
-  
+ #name{
+  margin-top: 150px;
+ }
+ 
