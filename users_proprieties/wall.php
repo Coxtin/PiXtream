@@ -1,6 +1,6 @@
 <?php require_once("../config.php"); ?>
-
 <?php include("../includes_signup_login/code_functions.php");?>
+<?php checkIfUserIsConnected(); ?>
 <?php $posts = getPublishedPosts();
 // echo '<pre>';
 // echo print_r($posts);

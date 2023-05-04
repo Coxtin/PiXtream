@@ -192,5 +192,11 @@ function emptyInputLogin($username, $pwd) {
             }
             }
         }
+        function checkIfUserIsConnected(){ 
+
+            if(!isset($_SESSION['usersId'])){
+            header('location:../index.php');
+  }
+        }
        
 ?>

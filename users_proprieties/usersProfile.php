@@ -1,6 +1,7 @@
 <?php require_once("../config.php"); ?>
 <?php include('../includes/sidebar.php'); ?>
 <?php include('../includes_signup_login/code_functions.php'); ?>
+<?php checkIfUserIsConnected(); ?>
 
 <link rel="stylesheet" href="../static/css/usersProfile.css">
 <div class="profile">
