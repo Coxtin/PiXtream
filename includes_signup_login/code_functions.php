@@ -192,5 +192,8 @@ function emptyInputLogin($username, $pwd) {
             }
             }
         }
+    function changeImageExtentionToPNG(){
+
+    }
        
 ?>
