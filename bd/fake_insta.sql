@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gazdă: localhost
--- Timp de generare: apr. 24, 2023 la 06:29 PM
+-- Timp de generare: mai 04, 2023 la 10:43 AM
 -- Versiune server: 8.0.31
--- Versiune PHP: 7.4.32
+-- Versiune PHP: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,8 +31,8 @@ CREATE TABLE `comments` (
   `commentId` int NOT NULL,
   `usersCommentId` int DEFAULT NULL,
   `postCommentId` int DEFAULT NULL,
-  `name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `created` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `created` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -46,11 +46,22 @@ CREATE TABLE `posts` (
   `usersPostId` int DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `postImage` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `content` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `content` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `published` tinyint(1) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `reactionPost` varchar(250) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Eliminarea datelor din tabel `posts`
+--
+
+INSERT INTO `posts` (`postId`, `usersPostId`, `title`, `postImage`, `content`, `published`, `createdAt`, `updatedAt`, `reactionPost`) VALUES
+(1, NULL, 'Hai sa traesti', 'img1.jpg', 'cv', 1, '2023-04-22 19:49:37', '2023-04-22 19:49:37', NULL),
+(2, 3, 'Hai sa traesti', 'img2.jpg', 'cv', 1, '2023-04-22 19:49:37', '2023-04-22 19:49:37', NULL),
+(4, 3, 'Hai sa traesti', 'img3.jpg', 'cv', 1, '2023-04-22 19:49:37', '2023-04-22 19:49:37', NULL),
+(6, 3, 'Hai noroc', 'img5.jpg', 'hai noroc', 1, '2023-04-22 19:49:37', '2023-04-22 19:49:37', NULL);
 
 -- --------------------------------------------------------
 
@@ -60,8 +71,8 @@ CREATE TABLE `posts` (
 
 CREATE TABLE `profilecoverpicture` (
   `profileCoverId` int DEFAULT NULL,
-  `profilePicture` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `coverPicture` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `profilePicture` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `coverPicture` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -72,15 +83,15 @@ CREATE TABLE `profilecoverpicture` (
 
 CREATE TABLE `users` (
   `usersId` int NOT NULL,
-  `usersFirstName` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `usersLastName` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `usersUsername` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `usersEmail` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `usersBirthday` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `usersGender` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `usersPhone` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `usersPwd` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `usersDescription` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `usersFirstName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usersLastName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usersUsername` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usersEmail` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usersBirthday` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usersGender` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usersPhone` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usersPwd` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usersDescription` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -90,7 +101,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`usersId`, `usersFirstName`, `usersLastName`, `usersUsername`, `usersEmail`, `usersBirthday`, `usersGender`, `usersPhone`, `usersPwd`, `usersDescription`, `createdAt`, `updatedAt`) VALUES
-(1, 'Oltean', 'Costin', 'Coxtin', 'olteancostin3@gmail.com', '2004-04-01', 'Male', '0752827968', '$2y$10$ps9hZ0Gr/1ryrtOkcfFRs.Kf2oGpLnf3wLJ6jJebuaFeGOYFgeIrS', NULL, '2023-04-22 19:49:37', NULL);
+(3, 'mino', 'dora', 'mino.dora', 'prundarmino@gmail.com', '2004-01-30', 'Female', '07 n-am cartela', '$2y$10$3HTENMzb8L72mTkGxZFeEuSAUei977LKpAh0XOQg/2NwoUZVv/sK6', 'hello world', '2023-05-02 09:39:11', NULL),
+(4, 'Oltean', 'Costin', 'Coxtin', 'olteancostin3@gmail.com', '2004-04-01', 'Male', '07 n-am cartela', '$2y$10$4z1i4K57ltzaVtMs/TtR2OvtaiDPngOEASq0nR59zwv06.kF0UanK', NULL, '2023-05-04 08:49:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -101,7 +113,7 @@ INSERT INTO `users` (`usersId`, `usersFirstName`, `usersLastName`, `usersUsernam
 CREATE TABLE `usersphotos` (
   `photosId` int NOT NULL,
   `usersPhotoId` int DEFAULT NULL,
-  `dateAdded` varchar(100) COLLATE utf8mb4_general_ci NOT NULL
+  `dateAdded` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -156,13 +168,13 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT pentru tabele `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `postId` int NOT NULL AUTO_INCREMENT;
+  MODIFY `postId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pentru tabele `users`
 --
 ALTER TABLE `users`
-  MODIFY `usersId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `usersId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pentru tabele `usersphotos`
