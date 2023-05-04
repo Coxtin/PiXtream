@@ -2,5 +2,8 @@
 
     if(isset($_POST['submit'])){
         if(!empty($_FILES['image'])){
+            $target_dir = "../static/images";
+            
+
         }
     }
