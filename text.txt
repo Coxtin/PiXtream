@@ -1,35 +1,10 @@
-body{
-    background-color:whitesmoke;
-}
-.titlu{
-    text-align:center;
-}
-.titlu2{
-    text-align: center;
-}
-.container{
-    margin:auto;
-    width: 50%;
-    border: 3px solid green;
-    padding:10 px;
-}
-.inregistrare{
-    text-align : center;
-}
-.inregistrarecountdown{
-    text-align:center;
-}
-.inceput{
-    text-align:center;
-}
-.v1{
-    border-left: 6px solid green;
-    height: 500px;
-    position: left;
-    left: 50%;
-    margin-left: -3px;
-    top: 0;  
-}
-
-insert into posts ('postId', 'usersPostId', 'title', 'postImage', 'content', 'published', 'createdAt', 'updatedAt')
-			VALUES(1, 1, 'Hai sa traesti', 'img1.jpg', 'cv', 1, '2023-04-22 22:49:37', '2023-04-22 22:49:37');
+Am creat codul pentru a putea adauga o postare (includes_signup_login/postsFunctions.php | users_proprieties/addAPost.php);
+Daca in folder ul imagini sunt imagini cu numele de Rexx_... , este din cauza faptului ca am fazut codul 
+pentru adaugarea unei postari, astfel incat, daca postarea contine o poza,poza trebuie sa aiba o extensie
+compatibila (JPG, GIF, PNG, JPEG) si daca este compatibila, atunci o sa ii schimbe numele pozei cu numele
+utilizatorului_un cod unic pentru fiecare poza, astfel incat, o poza nu poate fi publicata de 2 ori.
+Daca utilizatorul nu vrea sa introduca imagini in postarea sa, atunci este nevoit sa completeze sectiunea de titlu
+si cea de content.
+In includes_signup_login/code_functions.php am creat o functie care sa verifice extensia unei imagini, si am incercat
+sa creez o functie care sa imi dea username ul dupa id ul postarii.Daca aveti timp as dori sa va uitati peste
+ea, deoarece inca nu am reusit sa o fac sa mearga.

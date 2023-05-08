@@ -15,9 +15,10 @@
 
   <div class="card">
     <div class="card-body">
-      <h3 class="card-title"><?php echo  $posts_inside['title'] ?></h3>
-      <img src="../static/images/<?php echo  $posts_inside['postImage'] ?>" alt="">
+      <!--<h3 class = "card-title"><?php echo getUsernameByPost() ?></h3>-->
+      <h4 class = "card-title"><?php echo  $posts_inside['title'] ?></h4>
       <p><?php echo  $posts_inside['content'] ?></p>
+      <img src="../static/images/<?php echo  $posts_inside['postImage'] ?>" alt="">
     </div>
   </div>
     <?php endforeach ?>

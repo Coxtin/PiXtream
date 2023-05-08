@@ -2,3 +2,11 @@
     text-align: center;
     align-items: center;
 }
+#error{
+    color:red;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+#succes{
+    color:green;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}

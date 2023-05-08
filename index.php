@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="static/css/index.css">
 
     <?php 
-     if(isset($_SESSION['userUsername'])){
+     if(session_status() == PHP_SESSION_ACTIVE && isset($_SESSION['usersId'])){
         header('location:users_proprieties/wall.php');
     }
     ?>

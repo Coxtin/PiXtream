@@ -198,8 +198,16 @@ function emptyInputLogin($username, $pwd) {
             header('location:../index.php');
   }
         }
-    function changeImageExtentionToPNG(){
-
+    function checkImagesExtension($file){
+        $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif'];
+            $file_info = pathinfo($file['name']);
+            $file_extensions = strtolower($file_info['extension']);
+            return in_array($file_extensions, $allowed_extensions);
     }
-       
-?>
+    function getUsernameByPost(){
+        global $conn;
+        $postId = $_SESSION['usersPostId'];
+        $sql = "SELECT usersUsename FROM posts JOIN users ON posts.usersPostId = usersId WHERE postId = '$postId';";
+        $result = mysqli_query($conn, $sql);
+        return $result;
+    }   
