@@ -1,4 +1,5 @@
 <?php require("config.php"); ?>
+<?php include("includes_signup_login/code_functions.php"); ?>
     <link rel="stylesheet" href="static/css/signup.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,6 +65,7 @@
                 echo "<p id='error'>Something went wrong.Try again</p>";
             }
             elseif($_GET['error'] == "none"){
+                updateUsersProfileP();
                 header('location:includes_signup_login/signup_confirmation.php');
             }
         }

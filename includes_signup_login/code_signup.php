@@ -62,7 +62,6 @@
         header('location:../signup.php?error=usernameTaken');
         exit();
     }
-
     createAccount($conn, $firstname, $lastname, $username, $email, $birthday, $gender, $phone, $pwd1);
     }
     else{

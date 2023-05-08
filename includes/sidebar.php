@@ -6,6 +6,7 @@
   <a href="search.php">Search</a>
   <a href="messages.php">Messages</a>
   <a href="addAPost.php">Add a post</a>
+  <a href="editAccount.php">Edit account</a>
   <a href="logout.php">Logout</a>
 </div>
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>

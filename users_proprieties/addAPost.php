@@ -8,7 +8,7 @@
 <div class = "container">
     <form action="../includes_signup_login/postsFunctions.php" method="POST" enctype = "multipart/form-data">
     <input type="text" name = "title" placeholder = "Enter a title"><br>
-    <input type="textarea" name = "content" placeholder = "Enter some content">
+    <input type="textarea" name = "content" placeholder = "Enter some content"> <br>
     <input type="file" name = "image"> <br>
     <input type="submit" name = "submit" value="Upload">
     </form>

@@ -106,6 +106,12 @@ function usernameTaken($conn, $username, $email) {
         }
         mysqli_stmt_close($stmt); 
 }
+function updateUsersProfileP(){
+    $usersId = $_SESSION['usersId'];
+    $sql = "INSERT INTO profilecoverpicture (profileCoverId, profilePicture) VALUES ('$usersId', 'emptyProfilePicture.jpg');";
+    mysqli_query($conn, $sql);
+}
+
 function createAccount($conn, $firstname, $lastname, $username, $email, $birthday, $gender, $phone, $pwd1) {
     $sql = "INSERT INTO users(usersFirstName, usersLastName, usersUsername, usersEmail, usersBirthday, usersGender, usersPhone, usersPwd) VALUES(?,?,?,?,?,?,?,?)";
     $stmt = mysqli_stmt_init($conn);
