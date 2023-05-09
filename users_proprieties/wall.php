@@ -17,7 +17,12 @@ if(isset($_POST['like'])){
 };
 
 if(isset($_POST['dislike'])){
-
+  $reaction='like';
+  $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ($idPostare,{$_SESSION['usersId']},'Dislike')";
+  $result = mysqli_query($conn, $sql);
+  if(!$result){
+    echo "Error";
+}
 };
 
 if(isset($_POST['love'])){
