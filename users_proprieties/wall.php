@@ -2,51 +2,57 @@
 <?php include("../includes_signup_login/code_functions.php");?>
 <link rel="stylesheet" href="../static/css/images.css">
 <?php checkIfUserIsConnected(); ?>
-<?php $posts = getPublishedPosts();
+<?php $posts = getPublishedPosts(); ?>
 
-//
+<?php
+
+global $conn, $postId;
+
+
+
 if(isset($_POST['like'])){
-  $idPostare=$_POST['idPostare'];
-  //$_SESSION['usersId']
   $reaction='Like';
-  $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ($idPostare,{$_SESSION['usersId']},'$reaction')";
+  $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ($postId,{$_SESSION['usersId']},'$reaction')";
   $result = mysqli_query($conn, $sql);
   if(!$result){
     echo "Error";
   }
-};
-
-if(isset($_POST['dislike'])){
+elseif(isset($_POST['dislike'])){
   $reaction='Dislike';
-  $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ($idPostare,{$_SESSION['usersId']},'$reaction')";
+  $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ($postId,{$_SESSION['usersId']},'$reaction')";
   $result = mysqli_query($conn, $sql);
   if(!$result){
     echo "Error";
 }
-};
-
-if(isset($_POST['love'])){
+}
+elseif(isset($_POST['love'])){
   $reaction='Love';
-  $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ($idPostare,{$_SESSION['usersId']},'$reaction')";
+  $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ($postId,{$_SESSION['usersId']},'$reaction')";
   $result = mysqli_query($conn, $sql);
   if(!$result){
     echo "Error";
+  }
 }
-};
-//
+}
 
-
-  $sql = "SELECT * from postreaction";
-  mysqli_query($conn, $sql);
+  $sql = "SELECT count(reactionType) AS reactie, reactionType from postreaction GROUP BY reactionType;";
+  $result = mysqli_query($conn, $sql);
   $reaction = mysqli_fetch_all($result, MYSQLI_ASSOC);
+// echo '<pre>';
+//   echo print_r($reaction);
+//   echo '</pre>';
+  $countLike = $reaction[0]['reactie'];
+  $countDislike = $reaction[1]['reactie'];
+  $countLove = $reaction[2]['reactie'];
 
 ?>
+
 <?php include("../includes/header.php");?>
 <?php include("../includes/sidebar.php") ?>
 
 <div class="container justify-content-center ">
-<?php foreach($posts as $posts_inside):?>
-
+<?php foreach($posts as $posts_inside):
+  $postId=$posts_inside['postId'];?>
   <div class="card">
     <div class="card-body">
       <?php  
@@ -59,11 +65,10 @@ if(isset($_POST['love'])){
       <p><?php echo  $posts_inside['content'] ?></p>
       <?php if($posts_inside['postImage']){?><div><img class = "images" src="../static/images/<?php echo  $posts_inside['postImage'] ?>" alt=""></div><?php } ?>
       <form method = "POST">
-        <input type="hidden" name='idPostare' value=<?php echo $posts_inside['postId'] ?>>
-        <input type = "submit" name = "like" value ="Like">
-        <input type = "submit" name = "dislike" value ="Dislike">
-        <input type = "submit" name = "love" value ="Love">
-      </form>
+        <input type="hidden" name='postId' value=<?php echo $posts_inside['postId'] ?>>
+        <input type = "submit" name = "like" value ="Like 👍"><span class="me-3">   <?php echo $countLike ?></span>
+        <input type = "submit" name = "dislike" value ="Dislike 👎"> <span class="me-3"><?php echo $countDislike ?></span>
+        <input type = "submit" name = "love" value ="Love ❤"><span class="me-3"><?php echo $countLove ?></span>
     </div>
   </div>
     <?php endforeach ?>
