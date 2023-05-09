@@ -8,8 +8,8 @@
 if(isset($_POST['like'])){
   $idPostare=$_POST['idPostare'];
   //$_SESSION['usersId']
-  $reaction='like';
-  $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ($idPostare,{$_SESSION['usersId']},'Like')";
+  $reaction='Like';
+  $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ($idPostare,{$_SESSION['usersId']},'$reaction')";
   $result = mysqli_query($conn, $sql);
   if(!$result){
     echo "Error";
@@ -17,8 +17,8 @@ if(isset($_POST['like'])){
 };
 
 if(isset($_POST['dislike'])){
-  $reaction='like';
-  $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ($idPostare,{$_SESSION['usersId']},'Dislike')";
+  $reaction='Dislike';
+  $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ($idPostare,{$_SESSION['usersId']},'$reaction')";
   $result = mysqli_query($conn, $sql);
   if(!$result){
     echo "Error";
@@ -26,12 +26,19 @@ if(isset($_POST['dislike'])){
 };
 
 if(isset($_POST['love'])){
-
+  $reaction='Love';
+  $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ($idPostare,{$_SESSION['usersId']},'$reaction')";
+  $result = mysqli_query($conn, $sql);
+  if(!$result){
+    echo "Error";
+}
 };
-
-
-
 //
+
+
+  $sql = "SELECT * from postreaction";
+  mysqli_query($conn, $sql);
+  $reaction = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 ?>
 <?php include("../includes/header.php");?>
