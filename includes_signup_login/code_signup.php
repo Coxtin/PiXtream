@@ -13,7 +13,7 @@
     require_once ('../config.php');
     require_once ('code_functions.php');
 
-    if(emptyInputSignup($firstname, $lastname, $username, $gender, $phone, $birthday, $email, $pwd1, $pwd2) !== false){
+   if(emptyInputSignup($firstname, $lastname, $username, $gender, $phone, $birthday, $email, $pwd1, $pwd2) !== false){
         header('location:../signup.php?error=emptyInput');
         exit();
     }

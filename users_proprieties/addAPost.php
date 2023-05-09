@@ -1,4 +1,5 @@
 <?php require_once("../config.php"); ?>
+<?php include("../includes/header.php"); ?>
 <?php include("../includes_signup_login/code_functions.php");?>
 <?php checkIfUserIsConnected(); ?>
 
@@ -7,9 +8,9 @@
 
 <div class = "container">
     <form action="../includes_signup_login/postsFunctions.php" method="POST" enctype = "multipart/form-data">
-    <input type="text" name = "title" placeholder = "Enter a title"><br>
-    <input type="textarea" name = "content" placeholder = "Enter some content"> <br>
-    <input type="file" name = "image"> <br>
+    <input type="text" name = "title" placeholder = "Enter a title" class="form-control"><br>
+    <input type="textarea" name = "content" placeholder = "Enter some content" class="form-control"> <br>
+    <input type="file" name = "image" class="form-control"> <br>
     <input type="submit" name = "submit" value="Upload">
     </form>
 

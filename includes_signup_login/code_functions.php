@@ -107,6 +107,7 @@ function usernameTaken($conn, $username, $email) {
         mysqli_stmt_close($stmt); 
 }
 function updateUsersProfileP(){
+    global $conn;
     $usersId = $_SESSION['usersId'];
     $sql = "INSERT INTO profilecoverpicture (profileCoverId, profilePicture) VALUES ('$usersId', 'emptyProfilePicture.jpg');";
     mysqli_query($conn, $sql);
@@ -164,7 +165,7 @@ function emptyInputLogin($username, $pwd) {
 
     function getPublishedPosts(){
         global $conn;
-        $sql = "SELECT* FROM posts WHERE published = true";
+        $sql = "SELECT * FROM posts WHERE published = true";
         $result = mysqli_query($conn, $sql);
         $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
         return $posts;

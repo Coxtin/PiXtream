@@ -4,8 +4,9 @@
     include("code_functions.php");
 
     if(isset($_POST['like'])){
+        postsinside['postId']
         $userId = $_SESSION['usersId'];
-        $sql = "SELECT postId FROM posts WHERE postId"
+        $sql = "SELECT postId FROM posts WHERE postId";
         echo $userId;
         echo $postId;
     }
