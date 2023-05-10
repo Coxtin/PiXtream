@@ -3,8 +3,6 @@
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="wall.php">Home</a>
   <a href="usersProfile.php">Profile</a>
-  <a href="search.php">Search</a>
-  <a href="messages.php">Messages</a>
   <a href="addAPost.php">Add a post</a>
   <a href="editAccount.php">Edit account</a>
   <a href="logout.php">Logout</a>
