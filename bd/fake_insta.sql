@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gazdă: localhost
--- Timp de generare: mai 08, 2023 la 07:01 PM
+-- Timp de generare: mai 10, 2023 la 04:17 AM
 -- Versiune server: 8.0.31
--- Versiune PHP: 7.4.32
+-- Versiune PHP: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,8 +31,8 @@ CREATE TABLE `comments` (
   `commentId` int NOT NULL,
   `usersCommentId` int DEFAULT NULL,
   `postCommentId` int DEFAULT NULL,
-  `name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `created` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `created` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -45,8 +45,20 @@ CREATE TABLE `postreaction` (
   `reactionId` int NOT NULL,
   `reactionPostId` int DEFAULT NULL,
   `reactionUserId` int DEFAULT NULL,
-  `reactionType` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `reactionType` enum('Like','Dislike','Love','') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Eliminarea datelor din tabel `postreaction`
+--
+
+INSERT INTO `postreaction` (`reactionId`, `reactionPostId`, `reactionUserId`, `reactionType`) VALUES
+(1, 3, 10, 'Like'),
+(2, 2, 10, 'Like'),
+(3, 2, 10, 'Like'),
+(4, 2, 10, 'Dislike'),
+(5, 2, 10, 'Love'),
+(6, 2, 10, 'Like');
 
 -- --------------------------------------------------------
 
@@ -59,7 +71,7 @@ CREATE TABLE `posts` (
   `usersPostId` int DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `postImage` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `content` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `content` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `published` tinyint(1) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -86,8 +98,8 @@ INSERT INTO `posts` (`postId`, `usersPostId`, `title`, `postImage`, `content`, `
 
 CREATE TABLE `profilecoverpicture` (
   `profileCoverId` int DEFAULT NULL,
-  `profilePicture` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `coverPicture` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `profilePicture` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `coverPicture` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -98,15 +110,15 @@ CREATE TABLE `profilecoverpicture` (
 
 CREATE TABLE `users` (
   `usersId` int NOT NULL,
-  `usersFirstName` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `usersLastName` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `usersUsername` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `usersEmail` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `usersBirthday` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `usersGender` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `usersPhone` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `usersPwd` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `usersDescription` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `usersFirstName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usersLastName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usersUsername` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usersEmail` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usersBirthday` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usersGender` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usersPhone` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usersPwd` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usersDescription` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -118,7 +130,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`usersId`, `usersFirstName`, `usersLastName`, `usersUsername`, `usersEmail`, `usersBirthday`, `usersGender`, `usersPhone`, `usersPwd`, `usersDescription`, `createdAt`, `updatedAt`) VALUES
 (4, 'Popescu', 'Marion', 'Rexxx', 'costin_oln@yahoo.com', '2001-11-16', 'Male', '62496746', '$2y$10$n7ZqAS9RMqjwAj/lwnaLu.Fe.ae5QQzPNY9AHBXauJzxu3KpwnJau', '', '2023-04-29 19:01:32', NULL),
 (5, 'Bocirnea', 'Razvan', 'Simple', 'olteancstin3@gmail.com', '2004-06-01', 'Male', '35165641', '$2y$10$zekKtK5Ro.OyixB2yuo91u5bvt1Lfa77ZI/mEydj2KB54Ck8Fy43a', 'salut', '2023-04-30 10:01:16', NULL),
-(10, 'Oltean', 'Costin', 'Coxtin', 'olteancostin3@gmail.com', '2004-04-01', 'Male', '0752827968', '$2y$10$5kXceykKPX8MTGgp/c5CSufptFppfs.bfpJKWsR0UJsxxOnIMp6vi', NULL, '2023-05-08 18:50:15', NULL);
+(10, 'Oltean', 'Costin', 'Coxtin', 'olteancostin3@gmail.com', '2004-04-01', 'Male', '0752827968', '$2y$10$5kXceykKPX8MTGgp/c5CSufptFppfs.bfpJKWsR0UJsxxOnIMp6vi', 'ce mai faceti?', '2023-05-08 18:50:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -129,7 +141,7 @@ INSERT INTO `users` (`usersId`, `usersFirstName`, `usersLastName`, `usersUsernam
 CREATE TABLE `usersphotos` (
   `photosId` int NOT NULL,
   `usersPhotoId` int DEFAULT NULL,
-  `dateAdded` varchar(100) COLLATE utf8mb4_general_ci NOT NULL
+  `dateAdded` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -192,7 +204,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT pentru tabele `postreaction`
 --
 ALTER TABLE `postreaction`
-  MODIFY `reactionId` int NOT NULL AUTO_INCREMENT;
+  MODIFY `reactionId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pentru tabele `posts`
