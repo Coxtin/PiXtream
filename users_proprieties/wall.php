@@ -12,14 +12,14 @@ global $conn, $postId;
 
 if(isset($_POST['like'])){
   $reaction='Like';
-  $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ($postId,{$_SESSION['usersId']},'$reaction')";
+  $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ('$postId','{$_SESSION['usersId']}','$reaction')";
   $result = mysqli_query($conn, $sql);
   if(!$result){
     echo "Error";
   }
 elseif(isset($_POST['dislike'])){
   $reaction='Dislike';
-  $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ($postId,{$_SESSION['usersId']},'$reaction')";
+  $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ('$postId','{$_SESSION['usersId']}','$reaction')";
   $result = mysqli_query($conn, $sql);
   if(!$result){
     echo "Error";
@@ -27,7 +27,7 @@ elseif(isset($_POST['dislike'])){
 }
 elseif(isset($_POST['love'])){
   $reaction='Love';
-  $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ($postId,{$_SESSION['usersId']},'$reaction')";
+  $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ('$postId','{$_SESSION['usersId']}','$reaction')";
   $result = mysqli_query($conn, $sql);
   if(!$result){
     echo "Error";
@@ -38,13 +38,21 @@ elseif(isset($_POST['love'])){
   $sql = "SELECT count(reactionType) AS reactie, reactionType from postreaction GROUP BY reactionType;";
   $result = mysqli_query($conn, $sql);
   $reaction = mysqli_fetch_all($result, MYSQLI_ASSOC);
-// echo '<pre>';
-//   echo print_r($reaction);
-//   echo '</pre>';
+  //echo '<pre>';
+  //echo print_r($reaction);
+  //echo '</pre>';
   $countLike = $reaction[0]['reactie'];
   $countDislike = $reaction[1]['reactie'];
   $countLove = $reaction[2]['reactie'];
 
+  if(isset($_POST['submit-comment'])){
+    $comment = $_POST['comment'];
+    $sql = "INSERT INTO comments (usersCommentId, postCommentId, comment, created) VALUES ('{$_SESSION['usersId']}', '$postId', '$comment', NOW());";
+    $result = mysqli_query($conn, $sql);
+    if(!$result){
+      echo "Error";
+    }
+  }
 ?>
 
 <?php include("../includes/header.php");?>
@@ -69,7 +77,10 @@ elseif(isset($_POST['love'])){
         <input type = "submit" name = "like" value ="Like 👍"><span class="me-3">   <?php echo $countLike ?></span>
         <input type = "submit" name = "dislike" value ="Dislike 👎"> <span class="me-3"><?php echo $countDislike ?></span>
         <input type = "submit" name = "love" value ="Love ❤"><span class="me-3"><?php echo $countLove ?></span>
-    </div>
+        <input type="textarea" name = "comment" placeholder = "Enter a message">
+        <button type = "submit" name = "submit-comment">Submit comment</button>
+        </form>
+       </div>
   </div>
     <?php endforeach ?>
 </div>
