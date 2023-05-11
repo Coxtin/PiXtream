@@ -185,6 +185,15 @@ function emptyInputLogin($username, $pwd) {
         $row = mysqli_fetch_assoc($result);
         return $row['usersUsername'];
     }
+
+    function getUSERNAME($id){
+        global $conn;
+        $sql = "SELECT usersUsername FROM users WHERE usersId =".$id;
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row['usersUsername'];
+    }
+
     function getContentById(){
         global $conn;
         $sql = "SELECT usersDescription FROM users WHERE usersId = {$_SESSION['usersId']};";
@@ -218,3 +227,71 @@ function emptyInputLogin($username, $pwd) {
         $result = mysqli_query($conn, $sql);
         return $result;
     }   
+
+
+//reactii
+
+function like($idPostare,$idUser){
+    global $conn;
+    $verify='SELECT * from postreaction where reactionPostId='.$idPostare.' AND reactionUserId='.$idUser;
+    $valori=mysqli_fetch_all(mysqli_query($conn,$verify));
+    $exista=count($valori);
+    if(!$exista){
+        $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ('$idPostare','$idUser','Like')";
+        mysqli_query($conn, $sql);
+    }
+    if($exista){
+        $sql='DELETE FROM `postreaction` WHERE reactionPostId='.$idPostare.' AND reactionUserId='.$idUser;
+        mysqli_query($conn, $sql);
+        if($valori[0][3]!='Like'){
+            $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ('$idPostare','$idUser','Like')";
+            mysqli_query($conn, $sql);
+        }
+        
+    }
+};
+
+function dislike($idPostare,$idUser){
+    global $conn;
+
+    $verify='SELECT * from postreaction where reactionPostId='.$idPostare.' AND reactionUserId='.$idUser;
+    $valori=mysqli_fetch_all(mysqli_query($conn,$verify));
+    $exista=count($valori);
+    if(!$exista){
+        $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ('$idPostare','$idUser','Dislike')";
+        mysqli_query($conn, $sql);
+    }
+    if($exista){
+        $sql='DELETE FROM `postreaction` WHERE reactionPostId='.$idPostare.' AND reactionUserId='.$idUser;
+        mysqli_query($conn, $sql);
+        if($valori[0][3]!='Dislike'){
+        $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ('$idPostare','$idUser','Dislike')";
+        mysqli_query($conn, $sql);
+    }
+    }
+
+    
+};
+
+function love($idPostare,$idUser){
+    global $conn;
+
+    $verify='SELECT * from postreaction where reactionPostId='.$idPostare.' AND reactionUserId='.$idUser;
+    $valori=mysqli_fetch_all(mysqli_query($conn,$verify));
+    $exista=count($valori);
+    if(!$exista){
+        $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ('$idPostare','$idUser','Love')";
+        mysqli_query($conn, $sql);
+    }
+    if($exista){
+        $sql='DELETE FROM `postreaction` WHERE reactionPostId='.$idPostare.' AND reactionUserId='.$idUser;
+        mysqli_query($conn, $sql);
+        if($valori[0][3]!='Love'){
+            $sql="INSERT INTO postreaction(reactionPostId,reactionUserId,reactionType) values ('$idPostare','$idUser','Love')";
+            mysqli_query($conn, $sql);
+        }
+        
+    }
+};
+
+//--reactii
