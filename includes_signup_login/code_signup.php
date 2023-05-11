@@ -38,7 +38,7 @@
         exit();
     }
 
-    if(pwdLenght($pwd1) !== false){
+    /*if(pwdLenght($pwd1) !== false){
         header('location:../signup.php?error=pwdLenghtTooShort');
         exit();
     }
@@ -56,7 +56,7 @@
     if(pwdNumbers($pwd1) !== false){
         header('location:../signup.php?error=pwdNumbersNeeded');
         exit();
-    }
+    }*/
 
     if(usernameTaken($conn, $username, $email) !== false){
         header('location:../signup.php?error=usernameTaken');

@@ -7,14 +7,16 @@ global $conn;
     if(isset($_POST['submit-profile-picture'])){
         if(!empty($_FILES['profile-picture']['name'])){
             if(checkImagesExtension($_FILES['profile-picture'])){
-                $file_name = $_FILES['image']['name'];
-                $file_tmp = $_FILES['image']['tmp_name'];
+                $file_name = $_FILES['profile-picture']['name'];
+                $file_tmp = $_FILES['profile-picture']['tmp_name'];
                 $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
-                $new_file_name = getUsernameById(). '_'. md5_file($file_tmp). '.' .$file_ext;
-                $file_dest = "../static/images/".$new_file_name;
+                $new_file_name = $_SESSION['usersId']. '.' .$file_ext;
+                $file_dest = "../static/images/profile-pictures/".$new_file_name;
+                move_uploaded_file($file_tmp, $file_dest); 
+                header('location:../users_proprieties/usersProfile.php?error=none'); 
             }
             else{
-                echo "wrong format"; 
+                header('location:../users_proprieties/editAccount.php?error=InvalidFileFormat');
             }
         }
         else{

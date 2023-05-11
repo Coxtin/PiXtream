@@ -8,6 +8,16 @@
         <input type="file" name = "profile-picture"> <br>
         <button type="submit" name="submit-profile-picture">Select picture</button> 
     </form>
+    <?php 
+        if(isset($_GET['error'])){
+            if($_GET['error'] == "InvalidFileFormat"){
+                echo "<p>Invalid image format. Please upload a JPG, PNG, or GIF file!</p>";
+            }
+            elseif($_GET['error'] == "SelectAPictureFirst"){
+                echo "<p>Select a picture first!</p>";
+            }
+        }
+    ?>
    
     <hr>
     <h3>Change your description:</h3>

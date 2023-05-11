@@ -21,4 +21,11 @@ body{
  #name{
   margin-top: 150px;
  }
+
+img{
+  width:150px;
+  height:150px;
+  background-size: cover;
+  border-radius:75px;
+ }
  
