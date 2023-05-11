@@ -53,7 +53,7 @@ if (isset($_POST['submit-comment'])) {
     $countLove = count(mysqli_fetch_all(mysqli_query($conn, $love)));
 
     ?>
-    <div class="card">
+    <div class="card" id="<?php echo $postId ?>">
       <div class="card-body">
         <?php
         $sql = "SELECT usersUsername FROM users where usersId=" . $posts_inside['usersPostId'];
@@ -88,14 +88,15 @@ if (isset($_POST['submit-comment'])) {
           <button type="submit" name="submit-comment">Submit comment</button>
         </form>
         <div class="card-comments">
-          <?php 
-            $sql='SELECT * FROM comments where postCommentId='.$posts_inside['postId'];
-            $randuri=mysqli_fetch_all(mysqli_query($conn,$sql));
-            foreach($randuri as $rand){ ?>
-                <p>
-                <?php echo '<b>'.getUSERNAME($rand[1]).'</b>&nbsp;&nbsp;&nbsp;' ?>  
-                <?php echo $rand[3] ?></p>
-                <? }?>
+          <?php
+          $sql = 'SELECT * FROM comments where postCommentId=' . $posts_inside['postId'];
+          $randuri = mysqli_fetch_all(mysqli_query($conn, $sql));
+          foreach ($randuri as $rand) { ?>
+            <p>
+              <?php echo '<b>' . getUSERNAME($rand[1]) . '</b>&nbsp;&nbsp;&nbsp;' ?>
+              <?php echo $rand[3] ?>
+            </p>
+          <? } ?>
         </div>
       </div>
     </div>

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gazdă: localhost
--- Timp de generare: mai 10, 2023 la 04:17 AM
+-- Timp de generare: mai 11, 2023 la 09:08 AM
 -- Versiune server: 8.0.31
--- Versiune PHP: 7.4.33
+-- Versiune PHP: 7.4.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,11 +29,22 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `comments` (
   `commentId` int NOT NULL,
-  `usersCommentId` int DEFAULT NULL,
-  `postCommentId` int DEFAULT NULL,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `created` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
+  `usersCommentId` int NOT NULL,
+  `postCommentId` int NOT NULL,
+  `text` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Eliminarea datelor din tabel `comments`
+--
+
+INSERT INTO `comments` (`commentId`, `usersCommentId`, `postCommentId`, `text`, `created`) VALUES
+(14, 10, 18, 'it do be like that sometimes', '2023-05-10 20:23:14'),
+(17, 10, 7, 'un tigru', '2023-05-10 20:41:58'),
+(18, 10, 8, 'ba esti dement', '2023-05-10 20:42:13'),
+(19, 5, 7, 'ala e rechin ba', '2023-05-10 20:43:14'),
+(20, 11, 7, 'nu pe bune', '2023-05-10 20:59:41');
 
 -- --------------------------------------------------------
 
@@ -53,12 +64,8 @@ CREATE TABLE `postreaction` (
 --
 
 INSERT INTO `postreaction` (`reactionId`, `reactionPostId`, `reactionUserId`, `reactionType`) VALUES
-(1, 3, 10, 'Like'),
-(2, 2, 10, 'Like'),
-(3, 2, 10, 'Like'),
-(4, 2, 10, 'Dislike'),
-(5, 2, 10, 'Love'),
-(6, 2, 10, 'Like');
+(1, 8, 10, 'Love'),
+(2, 7, 11, 'Love');
 
 -- --------------------------------------------------------
 
@@ -130,7 +137,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`usersId`, `usersFirstName`, `usersLastName`, `usersUsername`, `usersEmail`, `usersBirthday`, `usersGender`, `usersPhone`, `usersPwd`, `usersDescription`, `createdAt`, `updatedAt`) VALUES
 (4, 'Popescu', 'Marion', 'Rexxx', 'costin_oln@yahoo.com', '2001-11-16', 'Male', '62496746', '$2y$10$n7ZqAS9RMqjwAj/lwnaLu.Fe.ae5QQzPNY9AHBXauJzxu3KpwnJau', '', '2023-04-29 19:01:32', NULL),
 (5, 'Bocirnea', 'Razvan', 'Simple', 'olteancstin3@gmail.com', '2004-06-01', 'Male', '35165641', '$2y$10$zekKtK5Ro.OyixB2yuo91u5bvt1Lfa77ZI/mEydj2KB54Ck8Fy43a', 'salut', '2023-04-30 10:01:16', NULL),
-(10, 'Oltean', 'Costin', 'Coxtin', 'olteancostin3@gmail.com', '2004-04-01', 'Male', '0752827968', '$2y$10$5kXceykKPX8MTGgp/c5CSufptFppfs.bfpJKWsR0UJsxxOnIMp6vi', 'ce mai faceti?', '2023-05-08 18:50:15', NULL);
+(10, 'Oltean', 'Costin', 'Coxtin', 'olteancostin3@gmail.com', '2004-04-01', 'Male', '0752827968', '$2y$10$5kXceykKPX8MTGgp/c5CSufptFppfs.bfpJKWsR0UJsxxOnIMp6vi', 'ce mai faceti?', '2023-05-08 18:50:15', NULL),
+(11, 'Răzvan', 'Bocîrnea', 'razvan.b', 'razvan.bocarnea113@gmail.com', '2004-06-01', 'Male', '0769974796', '$2y$10$MsRpqpuDMlAdD4qLl2PISe32MEhbqZQns2C8uWw7zablw0fYhCbda', NULL, '2023-05-10 20:58:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -198,25 +206,25 @@ ALTER TABLE `usersphotos`
 -- AUTO_INCREMENT pentru tabele `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `commentId` int NOT NULL AUTO_INCREMENT;
+  MODIFY `commentId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT pentru tabele `postreaction`
 --
 ALTER TABLE `postreaction`
-  MODIFY `reactionId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `reactionId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pentru tabele `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `postId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `postId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT pentru tabele `users`
 --
 ALTER TABLE `users`
-  MODIFY `usersId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `usersId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pentru tabele `usersphotos`
